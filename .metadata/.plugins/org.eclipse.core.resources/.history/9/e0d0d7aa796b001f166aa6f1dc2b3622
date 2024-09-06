@@ -1,0 +1,34 @@
+package idata;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class jUnitTest {
+	DevIdata devIdata = new DevIdata();
+	ProductionIdata productionIdata = new ProductionIdata();
+	@Test
+	void test() {
+		/*Testa om DevelopmentData sträng ör korekt")*/
+		assertTrue((devIdata.dep) == "Development");
+		/*Testa om DevelopmentData enum ör korekt*/
+		assertTrue((devIdata.work) == MainWork.Digital);
+		/*Testa om ProductonData sträng ör korekt*/
+		assertTrue((productionIdata.dep) == "Pr2oduction");
+		/*Testa om ProductonData enum ör korekt*/
+		assertTrue((productionIdata.work) == MainWork.Digital);
+	}
+	void test2() {
+		/*Testa om DevelopmentData enum ör korekt*/
+		assertTrue((devIdata.work) == MainWork.Digital);
+	}
+	void test3() {
+		/*Testa om ProductonData sträng ör korekt*/
+		assertTrue((productionIdata.dep) == "Pr2oduction");
+	}
+	void test4() {
+		/*Testa om ProductonData enum ör korekt*/
+		assertTrue((productionIdata.work) == MainWork.Digital);
+	}
+
+}

@@ -1,0 +1,105 @@
+package sudoko;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
+
+class ShapesJPanel extends JPanel 
+{
+   // draw shapes with Java 2D API
+   public void paintComponent( Graphics g, int[] sudokuNr )
+   {
+	   super.paintComponent( g ); // call superclass's paintComponent
+ 
+      	Graphics2D g2d = ( Graphics2D ) g; // cast g to Graphics2D
+ 
+      	g2d.clearRect(50,60,300,300);
+      	g2d.setColor(Color.black);
+      	g2d.drawRect(50,60,300,300);
+      	g2d.setFont(new Font("TimesRoman", Font.PLAIN, 50)); 
+	
+		for (int j = 0 ; j<4; j++)
+		{
+			for (int i = 0 ; i<4; i++)
+			{
+				g2d.drawRect(50+(75*i),60+(75*j),75,75);
+			}
+		}
+		int i = 0;
+		while (i<16)
+		{
+			
+			int y =0;
+			if (i>=0 & i<4)
+			{
+				y= 115;
+				for (int x = 0 ; x<4; x++)
+				{
+					g.drawString(String.valueOf(sudokuNr[i]), 70+(75*x), y);
+					i++;
+					
+				}
+				System.out.println(i);
+			}
+			if (i>=4 & i<8)
+			{
+				y= 190;
+				for (int x = 0 ; x<4; x++)
+				{
+					g.drawString(String.valueOf(sudokuNr[i]), 70+(75*x), y);
+					i++;
+				}
+			}
+			if (i>=8 & i<12)
+			{
+				y= 265;
+				for (int x = 0 ; x<4; x++)
+				{
+					g.drawString(String.valueOf(sudokuNr[i]), 70+(75*x), y);
+					i++;
+				}	
+			}
+			if (i>=12 & i<16)
+			{
+				y= 340;
+				for (int x = 0 ; x<4; x++)
+				{
+					g.drawString(String.valueOf(sudokuNr[i]), 70+(75*x), y);
+					i++;
+				}	
+			}
+				
+		}
+   }
+}
+public class drawWindow {
+	
+	int[] sudokuNr;
+	JButton button;
+	JFrame window = new JFrame();
+	public drawWindow(int[] sudokuNr, JButton button)
+	{
+		makeWindow(sudokuNr);
+	}
+	public void makeWindow(int[] sudokuNr)
+	{
+		window.setSize(410, 430); 
+		window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		window.setLocationRelativeTo(null);
+		window.setVisible(true);
+		window.add(button);
+		this.sudokuNr = sudokuNr;
+		window.repaint();
+	}
+
+	
+}

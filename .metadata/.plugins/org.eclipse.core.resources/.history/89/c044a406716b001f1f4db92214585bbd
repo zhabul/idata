@@ -1,0 +1,26 @@
+package idata;
+
+enum MainWork {
+	  Paper,
+	  Digital
+}
+
+interface IIData {
+	  public MainWork getMainWorgk(); 
+	  public String getDepartment(); 
+	}
+abstract class BaseIdata implements IIData {
+	 private String dep;
+	 private MainWork work;  
+	  public String getDepartment() {
+		return dep;
+	  }
+	  public MainWork getMainWorgk() {
+		return work;
+	  }
+	}
+
+
+class devIdata extends BaseIdata {
+	
+}

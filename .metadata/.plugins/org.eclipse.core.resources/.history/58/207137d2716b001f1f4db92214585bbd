@@ -1,0 +1,37 @@
+package idata;
+
+enum MainWork {
+	  Paper,
+	  Digital
+}
+
+interface IIData {
+	  public MainWork getMainWorgk(); 
+	  public String getDepartment(); 
+	}
+abstract class BaseIdata implements IIData {
+	 protected String dep;
+	 protected MainWork work;  
+	  public String getDepartment() {
+		return dep;
+	  }
+	  public MainWork getMainWorgk() {
+		return work;
+	  }
+	}
+
+class ProductionIdata extends BaseIdata {{
+	
+	ProductionIdata productionIdata = new ProductionIdata();
+	productionIdata.dep="Production";
+	productionIdata.work=MainWork.Paper;}
+
+}
+
+class test {
+	  public static void main(String[] args) {
+		  //DevIdata dI = new DevIdata();
+		  ProductionIdata pI = new ProductionIdata();
+		  System.out.println("Hello, World!");
+	  }
+	}

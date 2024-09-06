@@ -1,0 +1,179 @@
+package sudoko;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+
+
+
+
+public class Main   {
+	
+	static drawWindow dw;
+	static JButton button = new JButton("ok");
+	static int[][] btempMatrix = new int[][] { { 4, 0, 0, 0},   
+						{ 0, 0, 2, 0},   
+						{ 0, 3, 0, 0},   
+						{ 1, 0, 0, 0}  
+                              } ;  
+
+   
+                 
+	public static void main(String[] args)
+	{
+		/*button.setLayout(null);
+		button.setSize(10,40);
+
+		button.setVisible(true);
+		button.addActionListener(new ActionListener() { 
+		public void actionPerformed(ActionEvent e) { 
+		    	button();
+		    } 
+		});*/
+		Main obj = new Main();  
+		int size = tempMatrix.length;  
+   
+		System.out.println("The grid is: ");
+   
+	   for(int i = 0; i < size; i++)  
+	   {  
+		   for(int j = 0; j < size; j++)  
+		   {  
+			   System.out.print(tempMatrix[i][j] + " ");    
+		   }  
+	     
+		   System.out.println();  
+	   }  
+	   	System.out.println();  
+	   	if (obj.doIt(tempMatrix, size))  
+	   	{  
+	   		// display solution  
+	     
+	   		System.out.println("The solution of the grid is: ");  
+	   		obj.display(tempMatrix, size);  
+	   	}  
+	   else   
+	   {  
+	   System.out.println("There is no solution available.");  
+	   }  
+   } 
+		//dw = new drawWindow(randNr());
+
+
+    public boolean checkIfOk(int row, int collumn, int[][] sudokuMatrix, int current_nr)  
+    {  
+   
+	    for (int i = 0; i < sudokuMatrix.length; i++)  
+	    {  
+	 
+	    	if (sudokuMatrix[row][i] == current_nr)   
+			{  
+			    return false;  
+			}  
+	    }  
+      
+	    for (int j = 0; j < sudokuMatrix.length; j++)  
+	    {  
+
+		    if (sudokuMatrix[j][collumn] ==current_nr)  
+		    {  
+		    	return false;  
+		    }  
+	    }  
+      
+		int rutenur = (int)Math.sqrt(sudokuMatrix.length);  
+	    int MatrixRow = row - row % rutenur;  
+	    int MatrixCollum = collumn - collumn % rutenur;  
+    
+	    for (int i = MatrixRow; i < MatrixRow + rutenur; i++)  
+	    {  
+		    for (int j = MatrixCollum; j < MatrixCollum + rutenur; j++)  
+		    {  
+		
+		    	if (sudokuMatrix[i][j] == current_nr)  
+		    	{  
+		    		return false;  
+		    	}  
+		    }  
+	    }  
+       
+    return true;  
+    } 
+    public boolean doIt(int[][] sudokuMatrix, int current_nr)  
+    {  
+	    int row=-1;  
+	    int collumn=1;
+	    
+	    int isfree = 1;  
+	    for (int i = 0; i < current_nr; i++)  
+	    {  
+	    	for (int j = 0; j < current_nr; j++)  
+	    	{  
+	    			if (sudokuMatrix[i][j] == 0)  
+	    			{  
+	    				row = i;  
+	    				collumn = j;  
+	    				isfree = 0;  
+	    				break;  
+	    			}  
+	    	}  
+	      
+		    if (isfree==0)   
+		    {  
+		    	break;  
+		    }  
+		}  
+	    if (isfree==1)  
+	    {  
+	    	return true;  
+	    }  
+	    //do   
+		for (int i = 1; i <= current_nr; i++)  
+		{  
+			if (checkIfOk(row, collumn, sudokuMatrix,current_nr))  
+			    {  
+					sudokuMatrix[row][collumn] = current_nr;  
+			    	if (doIt(sudokuMatrix, current_nr))  //recusive
+			    	{  
+			    		return true;  
+			    	}	  
+			    	else  
+			    	{  
+			      		sudokuMatrix[row][collumn] = 0;  
+			    	}  
+			    }  
+			}  
+	    return false;  
+    }  
+    public void display(int[][] b, int n)  
+    {  
+      
+    // We have got the solution, just display it  
+    for (int i = 0; i < n; i++)  
+    {  
+    for (int d = 0; d < n; d++)  
+    {  
+    System.out.print(b[i][d]);  
+    System.out.print(" ");  
+    }  
+      
+    System.out.print("\n");  
+      
+    if ((i + 1) % (int)Math.sqrt(n) == 0)  
+    {  
+    System.out.print("");  
+    }  
+    }  
+    }  
+
+}

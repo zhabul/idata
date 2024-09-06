@@ -1,0 +1,166 @@
+package sudoko;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+
+
+public class Main   {
+	
+	static drawWindow dw;
+	static JButton button = new JButton("ok");
+	public static void main(String[] args)
+	{
+		/*button.setLayout(null);
+		button.setSize(10,40);
+
+		button.setVisible(true);
+		button.addActionListener(new ActionListener() { 
+		public void actionPerformed(ActionEvent e) { 
+		    	button();
+		    } 
+		});*/
+		dw = new drawWindow(randNr());
+
+	}
+	public static void button()
+	{
+		
+		dw = new drawWindow(randNr());
+	}
+    public static boolean check(int[] arr, int toCheckValue)
+    {
+        boolean test = false;
+        for (int element : arr) {
+            if (element == toCheckValue) {
+                test = true;
+                break;
+            }
+        }
+		return test;
+    }
+    public static boolean duplicated(int[] arr)
+    {
+	    boolean test = false;
+	    for(int i = 0; i < arr.length; i++) {  
+	        for(int j = i + 1; j < arr.length; j++) {  
+	            if(arr[i] == arr[j])  
+	            	test = true;
+	            break;  
+	        } 
+	       
+	    }
+	    return test;
+    }
+	public static int[] randNr() 
+	{
+		
+		int[] sudokuNr = new int[16];
+		int[][] VerticalTemp = 	{{0,0,0,0},
+								{0,0,0,0},
+								{0,0,0,0},
+								{0,0,0,0}};
+		int[][] HorizontalTemp = 	{{0,0,0,0},
+									{0,0,0,0},
+									{0,0,0,0},
+									{0,0,0,0}};
+		int[][] ChunkTemp = 	{{0,0,0,0},
+								{0,0,0,0},
+								{0,0,0,0},
+								{0,0,0,0}};
+		int temp=0;
+		boolean check = true;
+		//while (true)
+		{
+		for (int y = 0;y<4;y++) {
+			for (int x = 0;x<4;x++)
+			{
+
+				while (true) {
+					TimeUnit.SECONDS.sleep(1);
+					Random rc=new Random();
+					int random = rc.nextInt(5);
+					if (check(HorizontalTemp[x], random)== false) 
+					{	
+						if (check(VerticalTemp[y], random)== false)
+						{
+							//if (check(ChunkTemp[y], random)== false)
+							{
+								temp=random;
+								break;
+							}
+						}
+					} 
+				}
+
+				
+				
+				VerticalTemp[y][x]=temp;
+				HorizontalTemp[x][y]=temp;
+				if (y==0) {
+					if (x==0) ChunkTemp[0][0] =temp;
+					if (x==1) ChunkTemp[0][1] =temp;
+					if (x==2) ChunkTemp[1][0] =temp;
+					if (x==3) ChunkTemp[1][1] =temp;		
+				}
+				if (y==1) {
+					if (x==0) ChunkTemp[0][2] =temp;
+					if (x==1) ChunkTemp[0][3] =temp;
+					if (x==2) ChunkTemp[1][2] =temp;
+					if (x==3) ChunkTemp[1][3] =temp;
+				}
+				if (y==2) {
+					if (x==0) ChunkTemp[2][0] =temp;
+					if (x==1) ChunkTemp[2][1] =temp;
+					if (x==2) ChunkTemp[3][0] =temp;
+					if (x==3) ChunkTemp[3][1] =temp;
+				}
+				if (y==3) {
+					if (x==0) ChunkTemp[2][2] =temp;
+					if (x==1) ChunkTemp[2][3] =temp;
+					if (x==2) ChunkTemp[3][2] =temp;
+					if (x==3) ChunkTemp[3][3] =temp;
+				}
+					
+						
+				sudokuNr[x+(4*y)]=temp;
+				
+
+				
+			}
+			
+			//System.out.println(Arrays.toString(VerticalTemp[y]));
+			System.out.println();
+			//System.out.println(Arrays.toString(HorizontalTemp[y]));
+			System.out.println();
+			
+			}
+		//if (duplicated(ChunkTemp[0])==true) break;
+		if (check== true) if (duplicated(ChunkTemp[1])==true) check= false;
+		if (check== true) if (duplicated(ChunkTemp[1])==true) check= false;
+		if (check== true) if (duplicated(ChunkTemp[2])==true) check= false;
+		if (check== true) if (duplicated(ChunkTemp[3])==true) check= false;
+		System.out.println(check);
+		System.out.println(Arrays.toString(ChunkTemp[0]));
+		System.out.println(Arrays.toString(ChunkTemp[1]));
+		System.out.println(Arrays.toString(ChunkTemp[2]));
+		System.out.println(Arrays.toString(ChunkTemp[3]));	
+		
+		}
+		/*System.out.println(Arrays.toString(horizontalTemp[0]));
+		System.out.println(Arrays.toString(horizontalTemp[1]));
+		System.out.println(Arrays.toString(horizontalTemp[2]));
+		System.out.println(Arrays.toString(horizontalTemp[3]));*/
+
+		return sudokuNr;
+	
+	}
+}

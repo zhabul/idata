@@ -1,0 +1,15 @@
+package idata;
+
+enum MainWork {
+	  Paper,
+	  Digital
+}
+
+interface IIData {
+	  public MainWork getDepartment(); // interface method (does not have a body)
+	  public String getMainWorgK(); // interface method (does not have a body)
+	}
+
+public class test {
+
+}

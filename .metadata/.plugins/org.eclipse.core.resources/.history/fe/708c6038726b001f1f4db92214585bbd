@@ -1,0 +1,8 @@
+package idata;
+
+public class ProductionIdata extends BaseIdata {{
+	
+	ProductionIdata pD = new ProductionIdata("Production", MainWork.Paper);
+}
+
+}
